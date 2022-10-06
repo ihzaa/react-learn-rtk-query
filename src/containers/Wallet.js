@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  selectBalance,
-  selectUser,
-  deposit,
-  withdraw,
-} from '../reducers/walletSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { DEPOSIT, selectBalance, selectUser, WITHDRAW } from '../reducers/walletSlice';
 
 const Wallet = () => {
   // untuk mengakses state yang kita buat di store, kita bisa pakai hook useSelector
@@ -28,7 +24,7 @@ const Wallet = () => {
       //   payload: { amount: amount },
       // };
 
-      dispatch(withdraw({ amount }));
+      dispatch(WITHDRAW({ amount }));
     } catch (e) {
       alert(e.message);
     }
@@ -40,7 +36,7 @@ const Wallet = () => {
     //   payload: { amount: amount },
     // };
 
-    dispatch(deposit({ amount }));
+    dispatch(DEPOSIT({ amount }));
   };
 
   const [customAmount, setCustomAmount] = useState(0);
