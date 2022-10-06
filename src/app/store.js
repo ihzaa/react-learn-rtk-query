@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import walletReducer from '../reducers/walletSlice';
+import { colorApi } from '../services/colorAPI';
 
 // kita membuat store atau brankas dari bank
 // di sini kita bisa menyimpan state dalam satu objek atau single object
@@ -12,6 +14,7 @@ import walletReducer from '../reducers/walletSlice';
 const store = configureStore({
   reducer: {
     wallet: walletReducer,
+    [colorApi.reducerPath]: colorApi.reducer
   },
 });
 
