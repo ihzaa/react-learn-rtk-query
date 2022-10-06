@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { DEPOSIT, selectBalance, selectUser, WITHDRAW } from '../reducers/walletSlice';
+import { DEPOSIT, selectBalance, selectUser, userAsync, WITHDRAW } from '../reducers/walletSlice';
 
 const Wallet = () => {
   // untuk mengakses state yang kita buat di store, kita bisa pakai hook useSelector
@@ -13,6 +13,10 @@ const Wallet = () => {
 
   // kita pakai hooknya useDispatch agar bisa menggunakan fungsinya
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(userAsync());
+  }, []);
 
   // kita memanggil dispatch dengan sebuah objek yang kita sebut action
   // action ini akan berisi type dan payload jika ada
@@ -43,7 +47,7 @@ const Wallet = () => {
 
   return (
     <div>
-      <h1>{user} Wallet</h1>
+      <h1>{user.first_name} Wallet</h1>
       <h2>Balance: Rp {balance.toLocaleString('ID')}</h2>
       <button onClick={() => onWithdraw(10000)}>Withdraw Rp 10.000</button>
       <button onClick={() => onDeposit(10000)}>Deposit Rp 10.000</button>
