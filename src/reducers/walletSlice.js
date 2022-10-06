@@ -10,11 +10,11 @@ const initialState = { user: {}, balance: 100000 };
 // anggeplah dia kayak custom action
 export const userAsync = createAsyncThunk(
   'WALLET/FETCH_USER',
-  async () => {
+  async (userId) => {
     // aku destructure data dari axios
     // karena axios by default akan mengembalikan response yang sudah dibungkus dengan object
     // responsenya itu dibungkus dalam atribut 'data'
-    const { data: axiosData } = await axios.get('https://reqres.in/api/users/1');
+    const { data: axiosData } = await axios.get(`https://reqres.in/api/users/${userId}`);
 
     // data yang satu lagi datengnya dari API nya
     // karena API nya balikin respons dalam atribut data juga
