@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import Color from '../components/Color';
 import { useAddColorMutation } from '../services/colorApi';
 
 const ColorForm = () => {
@@ -9,7 +10,7 @@ const ColorForm = () => {
     // respon tersebut berisi {data, error, isLoading, isError, isSuccess}
     const [addColor, { isLoading, data }] = useAddColorMutation();
 
-    const defaultNewColor = { name: '', year: '', color: '', pantone: '' };
+    const defaultNewColor = { name: '', year: '', color: '', pantone_value: '' };
 
     const [newColor, setNewColor] = useState(defaultNewColor);
 
@@ -46,13 +47,17 @@ const ColorForm = () => {
                 placeholder='hex color' />
             <input
                 onChange={handleChange}
-                value={newColor.pantone}
-                name='pantone'
-                placeholder='pantone' />
+                value={newColor.pantone_value}
+                name='pantone_value'
+                placeholder='pantone value' />
             <button onClick={handleClick}>Create color</button>
             {/* hasil dari post bisa kita akses langsung di sini */}
             <p>Post result : </p>
-            {isLoading ? <div>Loading...</div> : <div>{JSON.stringify(data)}</div>}
+            {isLoading ? <div>Loading...</div> : <div>
+                {JSON.stringify(data)}
+                <Color item={data ? data : defaultNewColor} />
+            </div>}
+
         </div>
     )
 }

@@ -54,7 +54,7 @@ const walletSlice = createSlice({
         console.log('fail to get user');
       })
       .addCase(userAsync.pending, () => {
-        console.log('loading');
+        console.log('loading user');
       })
       .addCase(userAsync.fulfilled, (state, action) => {
         state.user = action.payload;
