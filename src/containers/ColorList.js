@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { useAddColorMutation, useGetColorsQuery } from '../services/colorAPI';
+import Color from '../components/Color';
+import { useGetColorsQuery } from '../services/colorApi';
 
 const ColorList = () => {
     // nama data yang ini datengnya by default dari RTK Query
@@ -8,18 +9,19 @@ const ColorList = () => {
     // yang dia beri nama data
     const { data, error, isLoading } = useGetColorsQuery();
 
-    // .data yang kedua datengnya dari API nya
+    // .data yang kedua datengnya daru API nya
     const loadData = isLoading ? <>Loading...</>
-        : data.data.map(item =>
-            <div style={{ backgroundColor: item.color }}>{item.name}</div>
-        );
+        : data.data.map(item => <Color key={item.id} item={item} />);
 
     return (
-        <div>
-            <h1>ColorList</h1>
-            {loadData}
-        </div>
-    )
+        <div className='color-list'>
+            {
+                error ? (
+                    <>Oh no, there was an error</>
+                ) : loadData
+            }
+        </div >
+    );
 }
 
 export default ColorList

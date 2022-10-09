@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import walletReducer from '../reducers/walletSlice';
-import { colorApi } from '../services/colorAPI';
+import { colorApi } from '../services/colorApi';
 
 // kita membuat store atau brankas dari bank
 // di sini kita bisa menyimpan state dalam satu objek atau single object
@@ -16,6 +16,9 @@ const store = configureStore({
     wallet: walletReducer,
     [colorApi.reducerPath]: colorApi.reducer
   },
+  // Menambahkan middleware untuk caching, invalidation, pooling
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(colorApi.middleware),
 });
 
 export default store;
