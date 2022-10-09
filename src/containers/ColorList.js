@@ -7,6 +7,7 @@ const ColorList = () => {
     // nama data yang ini datengnya by default dari RTK Query
     // RTK query mirip axios, dia akan bungkus result kita dalam object lagi
     // yang dia beri nama data
+    // kembalian dari hook use...Query adalah {data, error, isLoading, isError, isSuccess}
     const { data, error, isLoading } = useGetColorsQuery();
 
     // .data yang kedua datengnya daru API nya
