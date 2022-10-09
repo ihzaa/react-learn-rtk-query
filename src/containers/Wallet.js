@@ -23,11 +23,6 @@ const Wallet = () => {
   // payload juga biasanya bentuknya object
   const onWithdraw = (amount) => {
     try {
-      // const action = {
-      //   type: 'withdraw',
-      //   payload: { amount: amount },
-      // };
-
       dispatch(WITHDRAW({ amount }));
     } catch (e) {
       alert(e.message);
@@ -35,11 +30,6 @@ const Wallet = () => {
   };
 
   const onDeposit = (amount) => {
-    // const action = {
-    //   type: 'deposit',
-    //   payload: { amount: amount },
-    // };
-
     dispatch(DEPOSIT({ amount }));
   };
 
