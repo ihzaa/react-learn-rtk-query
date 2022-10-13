@@ -26,7 +26,7 @@ export const userAsync = createAsyncThunk(
 // ceritanya si reducer itu yang tadinya pake switch case mau kita iris-iris per state
 // jadi di sini cuma menyimpan state dari wallet
 const walletSlice = createSlice({
-  name: 'WALLET',
+  name: 'wallet',
   initialState,
   reducers: {
     WITHDRAW: (state, action) => {
