@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const initialState = { user: {}, balance: 100000 };
+const initialState = { user: {}, balance: 100000, loading: false, error: '' };
 
 // kita membuat sebuah middleware untuk hit data user dari API
 // di redux toolkit middlewarenya pakai thunk
@@ -9,6 +9,7 @@ const initialState = { user: {}, balance: 100000 };
 // dia dapat didispatch seperti action biasa
 // anggeplah dia kayak custom action
 export const userAsync = createAsyncThunk(
+  // action type
   'WALLET/FETCH_USER',
   async (userId) => {
     // aku destructure data dari axios
@@ -50,14 +51,17 @@ const walletSlice = createSlice({
     // karena promise bisa rejected, pending, dan fulfilled, maka kita handle
     // action.payload akan didapatkan dari apa yang kita return di userAsync
     builder
-      .addCase(userAsync.rejected, () => {
+      .addCase(userAsync.rejected, (error) => {
         console.log('fail to get user');
+        state.error = error.message;
+        state.loading = false;
       })
-      .addCase(userAsync.pending, () => {
-        console.log('loading user');
+      .addCase(userAsync.pending, (state) => {
+        state.loading = true;
       })
       .addCase(userAsync.fulfilled, (state, action) => {
         state.user = action.payload;
+        state.loading = false;
       })
   }
 });
